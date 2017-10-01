@@ -8,7 +8,7 @@ var incidentSchema = new Schema({
   },
   assignedAt: {
     type: Date,
-    required: true
+    default: new Date()
   },
   assignedBy: {
     type: String,
