@@ -1,18 +1,33 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-var Todo = mongoose.model('Todo', {
-  text: {
+var incidentSchema = new Schema({
+  incNumber: {
     type: String,
-    minlength: 1
+    required: true
   },
-  completed: {
-    type: Boolean,
-    default: false
+  assignedAt: {
+    type: Date,
+    required: true
   },
-  completedAt: {
-    type: Number,
+  assignedBy: {
+    type: String,
+    required: true
+  },
+  assignedTo: {
+    type: String,
+    required: true
+  },
+  assignmentType: {
+    type: String,
+    default: 'rotation'
+  },
+  prevAssignee: {
+    type: String,
     default: null
   }
 });
+
+var Incident = mongoose.model('Incident', incidentSchema);
 
 module.exports = {Todo};
