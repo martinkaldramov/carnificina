@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/martinkaldramov/carnificina/issues"
   },
-  "homepage": "https://github.com/martinkaldramov/carnificina#readme"
+  "homepage": "https://github.com/martinkaldramov/carnificina#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.1",
+    "mongodb": "^2.2.31",
+    "mongoose": "^4.11.14"
+  }
 }
