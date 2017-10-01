@@ -9,6 +9,10 @@ var agentSchema = new Schema({
   assigner: {
     type: Boolean,
     default: false
+  },
+  inAssigneeList: {
+    type: Boolean,
+    default: false
   }
 });
 

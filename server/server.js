@@ -3,8 +3,8 @@ var bodyParser = require('body-parser');
 var {ObjectID} = require('mongodb');
 
 var {mongoose} = require('./db/mongoose');
-var {Todo} = require('./models/Todo');
-var {User} = require('./models/User');
+var {Incident} = require('./models/incident.js');
+var {Agent} = require('./models/agent.js');
 
 var app = express();
 
