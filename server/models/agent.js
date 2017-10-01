@@ -1,12 +1,17 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-var User = mongoose.model('User', {
-  email: {
+var agentSchema = new Schema({
+  name: {
     type: String,
-    required: true,
-    trim: true,
-    minlength: 1
-  }  
+    required: true
+  },
+  assigner: {
+    type: Boolean,
+    default: false
+  }
 });
 
-module.exports = {User};
+var Agent = mongoose.model('Agent', agentSchema);
+
+module.exports = {Agent};

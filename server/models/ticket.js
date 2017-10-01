@@ -30,4 +30,4 @@ var incidentSchema = new Schema({
 
 var Incident = mongoose.model('Incident', incidentSchema);
 
-module.exports = {Todo};
+module.exports = {Incident};
