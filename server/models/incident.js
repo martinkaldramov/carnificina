@@ -22,9 +22,8 @@ var incidentSchema = new Schema({
     type: String,
     default: 'rotation'
   },
-  prevAssignee: {
-    type: String,
-    default: null
+  history: {
+    type: []
   }
 });
 

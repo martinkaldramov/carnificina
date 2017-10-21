@@ -11,12 +11,32 @@ var app = express();
 app.use(bodyParser.json());
 
 app.post('/incidents', (req, res) => {
-  id = req.body.incNumber;
+  var id = req.body.incNumber,
+      assignee = req.body.assignedTo,
+      assigner = req.body.assignedBy,
+      timeNow = new Date();
+
   console.log(id);
-  Incident.find({incNumber: id}).then((incident) => {
-    if(incident.length > 0){
-      console.log(incident);
-      res.send(`Ticket ${incident[0].incNumber} already assigned to ${incident[0].assignedTo}`);  
+
+  Incident.findOne({incNumber: id}).then((err, incident) => {
+
+    if(err)
+      return err;
+
+    console.log(incident);
+
+    if(incident){
+      incident.set({
+        assignedTo: assignee,
+        assignedAt: timeNow,
+      });
+      incident.history.push({
+         assgnedAt: timeNow,
+         assignedBy: ssigner,
+         assignedTo: assignee
+      });
+      incident.save();
+      res.send(`${incident[0].incNumber}  already assigned to ${incident[0].assignedTo}. New assignee is ${assignee}`);  
     }else{
       var incident = new Incident({
         incNumber: req.body.incNumber,
