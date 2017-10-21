@@ -10,7 +10,7 @@ var agentSchema = new Schema({
     type: Boolean,
     default: false
   },
-  inAssigneeList: {
+  assignee: {
     type: Boolean,
     default: false
   }
