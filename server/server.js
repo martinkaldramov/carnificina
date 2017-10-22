@@ -1,5 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var path = require('path');
 var {ObjectID} = require('mongodb');
 
 var {mongoose} = require('./db/mongoose');
@@ -8,7 +9,12 @@ var {Agent} = require('./models/agent.js');
 
 var app = express();
 
+app.use(express.static('../static'));
 app.use(bodyParser.json());
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname+'/index.html'));
+});
 
 app.post('/incidents', (req, res) => {
   var id = req.body.incNumber,
@@ -66,13 +72,10 @@ app.post('/incidents', (req, res) => {
 });
 
 app.get('/incidents', (req, res) => {
-  Incident.findOne({incNumber: "INC1233445566"}).then((incident) => {
-    if(incident)
-      res.send({incident});  
-    else
-      res.send("No incident with this ID found :\(");
-  }, (e) => {
-    res.status(400).send(e);
+  Incident.find({}).then((incidents) => {
+    res.send(incidents);
+  }).catch((e) => {
+    res.send(e);  
   });  
 });
 
