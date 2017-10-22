@@ -28,17 +28,17 @@ app.post('/incidents', (req, res) => {
       incident.assignedTo = req.body.assignedTo;
       incident.assignedAt = new Date();
       incident.assignedBy = req.body.assignedBy;
+      incident.assignmentType = "re-assigned";
       incident.history.push({
          assgnedAt: new Date(),
          assignedBy: req.body.assignedBy,
          assignedTo: req.body.assignedTo,
          assignmentType: "re-assigned" 
       });
-      incident.save((err, updatedInc) => {
-          if(err)
-            res.send(err);
-
-          res.send(updatedInc);  
+      incident.save().then((inc) => {
+        res.send(inc);  
+      }).catch((e) => {
+        res.send(e);  
       });
     }else{
       console.log("Inc not found part of code");
@@ -50,7 +50,7 @@ app.post('/incidents', (req, res) => {
           assgnedAt: new Date(),
           assignedBy: req.body.assignedBy,
           assignedTo: req.body.assignedTo,
-          assignmentType: "re-assigned" 
+          assignmentType: "rotation" 
         }]
       });
 
