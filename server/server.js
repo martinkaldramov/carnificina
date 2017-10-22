@@ -23,29 +23,41 @@ app.post('/incidents', (req, res) => {
     console.log(incident);
 
     if(incident){
-      console.log("processing the fiund incident part of the code");
-      // incident.assignedTo = assignee;
-      // incident.assignedAt = timeNow;
-      // incident.history.push({
-      //    assgnedAt: timeNow,
-      //    assignedBy: ssigner,
-      //    assignedTo: assignee,
-      //    assignmentType: reAssign
-      // });
-      // incident.save();
-      res.send(`${incident.incNumber}  already assigned to ${incident.assignedTo}. New assignee is ${assignee} \n ${incident}`);  
+      console.log("processing the found incident part of the code");
+      console.log(`${incident.incNumber}  already assigned to ${incident.assignedTo}. New assignee is ${assignee} \n`);
+      incident.assignedTo = req.body.assignedTo;
+      incident.assignedAt = new Date();
+      incident.assignedBy = req.body.assignedBy;
+      incident.history.push({
+         assgnedAt: new Date(),
+         assignedBy: req.body.assignedBy,
+         assignedTo: req.body.assignedTo,
+         assignmentType: "re-assigned" 
+      });
+      incident.save((err, updatedInc) => {
+          if(err)
+            res.send(err);
+
+          res.send(updatedInc);  
+      });
     }else{
       console.log("Inc not found part of code");
       var incident = new Incident({
         incNumber: req.body.incNumber,
         assignedBy: req.body.assignedBy,
         assignedTo: req.body.assignedTo,
+        history: [{
+          assgnedAt: new Date(),
+          assignedBy: req.body.assignedBy,
+          assignedTo: req.body.assignedTo,
+          assignmentType: "re-assigned" 
+        }]
       });
 
-      incident.save().then((doc) => {
-        res.send(doc);
+      incident.save().then((inc) => {
+        res.send(inc);  
       }).catch((e) => {
-        res.send(e);  
+        res.send(e);
       });
     } 
  }).catch((e) => {
