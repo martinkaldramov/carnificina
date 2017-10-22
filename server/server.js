@@ -18,26 +18,24 @@ app.post('/incidents', (req, res) => {
 
   console.log(id);
 
-  Incident.findOne({incNumber: id}).then((err, incident) => {
-
-    if(err)
-      return err;
+  Incident.findOne({incNumber: id}).then((incident) => {
 
     console.log(incident);
 
     if(incident){
-      incident.set({
-        assignedTo: assignee,
-        assignedAt: timeNow,
-      });
-      incident.history.push({
-         assgnedAt: timeNow,
-         assignedBy: ssigner,
-         assignedTo: assignee
-      });
-      incident.save();
-      res.send(`${incident[0].incNumber}  already assigned to ${incident[0].assignedTo}. New assignee is ${assignee}`);  
+      console.log("processing the fiund incident part of the code");
+      // incident.assignedTo = assignee;
+      // incident.assignedAt = timeNow;
+      // incident.history.push({
+      //    assgnedAt: timeNow,
+      //    assignedBy: ssigner,
+      //    assignedTo: assignee,
+      //    assignmentType: reAssign
+      // });
+      // incident.save();
+      res.send(`${incident.incNumber}  already assigned to ${incident.assignedTo}. New assignee is ${assignee} \n ${incident}`);  
     }else{
+      console.log("Inc not found part of code");
       var incident = new Incident({
         incNumber: req.body.incNumber,
         assignedBy: req.body.assignedBy,
@@ -46,17 +44,19 @@ app.post('/incidents', (req, res) => {
 
       incident.save().then((doc) => {
         res.send(doc);
-      }, (e) => {
-        res.status(400).send(e);
+      }).catch((e) => {
+        res.send(e);  
       });
     } 
+ }).catch((e) => {
+   res.send(e);
  }); 
 });
 
 app.get('/incidents', (req, res) => {
-  Incident.find({incNumber: "INC12334TEST3"}).then((incidents) => {
-    if(incidents.length > 0)
-      res.send({incidents});  
+  Incident.findOne({incNumber: "INC1233445566"}).then((incident) => {
+    if(incident)
+      res.send({incident});  
     else
       res.send("No incident with this ID found :\(");
   }, (e) => {
