@@ -9,11 +9,11 @@ var {Agent} = require('./models/agent.js');
 
 var app = express();
 
-app.use(express.static('../static'));
+app.use('/static', express.static(path.join(__dirname + '/../static')));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname+'/index.html'));
+  res.sendFile(path.join(__dirname + '/../index.html'));
 });
 
 app.post('/incidents', (req, res) => {
