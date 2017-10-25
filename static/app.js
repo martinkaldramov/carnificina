@@ -14,6 +14,14 @@ axios.get('http://127.0.0.1:3000/incidents')
     if(res.status == 200){
       tickets = res.data;    
       res.data.forEach((inc) => {
+        var id = document.createElement('p');
+        var assignee = document.createElement('p');
+        var div = document.createElement('div');
+        id.innerHTML = inc.incNumber;
+        assignee.innerHTML = inc.assignedTo;
+        div.appendChild(id);
+        div.appendChild(assignee);
+        ticketsSection.appendChild(div);
         console.log(inc.incNumber);  
       });
     }else
