@@ -4,13 +4,24 @@
   <link rel="stylesheet" href="./static/styles.css">
 </head>
 <body>
-  <nav class="navigation">
-    <ul>
-     <li class="nav-item">Configuration</li>
-     <li class="nav-item">Ticket Stats</li>
-     <li class="nav-item">Profile</li>
-    </ul>
-  </nav>
+  <header>
+    <div class="queuePlaceholder">
+      <input type="radio" class="queue" 
+             name="queue" value="emea" checked>
+      <label for="emea">EMEA</label>
+      <input type="radio" class="queue" 
+             name="queue" value="cr">
+      <label for="cr">CR</label>
+    </div>  
+
+    <nav class="navigation">
+      <ul>
+       <li class="nav-item">Configuration</li>
+       <li class="nav-item">Ticket Stats</li>
+       <li class="nav-item">Profile</li>
+      </ul>
+    </nav>
+  </header>
 
   <div class="wrapper">
 

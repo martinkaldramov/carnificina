@@ -2,7 +2,10 @@ var assignButton = document.querySelector('#assign');
 var reAssignButton = document.querySelector('#reAssign');
 var manualAssignButton = document.querySelector('#manualAssign');
 var ticketsSection = document.querySelector('.tickets');
+var queue = document.querySelector('.queue:checked');
 var tickets = [];
+
+console.log(queue);
 
 assignButton.onclick = () => {
   console.log('Click!');  
