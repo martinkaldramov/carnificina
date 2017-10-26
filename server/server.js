@@ -66,6 +66,7 @@ app.post('/incidents-reassign', (req, res) => {
 
       console.log("processing the found incident part of the code");
       console.log(`${incident.incNumber}  already assigned to ${incident.assignedTo}. New assignee is ${assignee} \n`);
+      incident.incNumber = id;
       incident.assignedTo = req.body.assignedTo;
       incident.assignedAt = new Date();
       incident.assignedBy = req.body.assignedBy;

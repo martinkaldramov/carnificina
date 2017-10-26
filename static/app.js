@@ -1,6 +1,6 @@
 var assignButton = document.querySelector('#assign');
-var reAssignButton = document.querySelector('#reAssign');
-var manualAssignButton = document.querySelector('#manualAssign');
+var reAssignButton = document.querySelector('#re-assign');
+var manualAssignButton = document.querySelector('#manual-assign');
 var ticketsSection = document.querySelector('.tickets');
 var tickets = [];
 
@@ -11,7 +11,7 @@ assignButton.onclick = () => {
   axios.post('/incidents', {
     incNumber,
     assignedBy: "Martin Kaldramov",
-    assignedTo: "Mladen Slavchev",
+    assignedTo: "Georgi Vladev",
     queue
   })
   .then((res) => {
@@ -20,6 +20,28 @@ assignButton.onclick = () => {
   .catch((e) => {
     console.log(e);
   });
+}
+
+var reAssign = () => {
+  var incNumber = document.getElementById('ticket-number').value;
+  var queue = document.querySelector('.queue:checked').value;
+  
+  axios.post('/incidents-reassign', {
+    incNumber,
+    assignedBy: "Georgi Vachev",
+    assignedTo: "Borislav Dzhonov",
+    queue
+  })
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((e) => {
+    console.log(e);
+  });  
+}
+
+reAssignButton.onclick = () => {
+  reAssign();
 }
 
 axios.get('http://127.0.0.1:3000/incidents')
