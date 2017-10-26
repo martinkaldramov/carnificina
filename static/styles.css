@@ -1,0 +1,49 @@
+/*
+----------- Body -------------
+*/
+
+body {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+}
+
+.wrapper {
+  width: 80%;
+  margin: auto;
+  margin-top: 13%;
+}
+
+/* 
+-------- Navigation ---------- 
+ */
+
+.navigation ul {
+  margin: 2px 0;
+}
+
+.navigation ul:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.nav-item {
+  display: inline-block;
+  float: right;
+  margin: 3px 7px;
+  padding: 7px 10px;
+  background-color: #00a230;
+}
+
+/*
+--------- Assign Form ---------
+*/
+
+.assign-field {
+  margin: 0 auto;
+}
+
+#ticket-number {
+  display: block;
+}

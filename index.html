@@ -4,15 +4,28 @@
   <link rel="stylesheet" href="./static/styles.css">
 </head>
 <body>
-  <h1>Carnificina</h1>
-  <form class="assignField">
-    <input type="text" name="incNumber" />
-    <button type="button" id="assign">Assign</button>
-    <button type="button" id="reAssign">Re-Assign</button>
-    <button type="button" id="manualAssign">Manual Assign</button>
-  </form>
+  <nav class="navigation">
+    <ul>
+     <li class="nav-item">Configuration</li>
+     <li class="nav-item">Ticket Stats</li>
+     <li class="nav-item">Profile</li>
+    </ul>
+  </nav>
 
-  <section class="tickets"><p>Some Shit</p></section>
+  <div class="wrapper">
+
+    <h1 id="title">Carnificina</h1>
+
+    <div class="assign-field">
+      <form> 
+        <input type="text" name="incNumber" id="ticket-number"/>
+        <button type="button" id="assign">Assign</button>
+        <button type="button" id="re-assign">Re-Assign</button>
+        <button type="button" id="manual-assign">Manual Assign</button>
+      </form>
+    </div>
+  </div>
+
 
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="./static/app.js"></script>
