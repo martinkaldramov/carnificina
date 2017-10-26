@@ -79,6 +79,18 @@ app.get('/incidents', (req, res) => {
   });  
 });
 
+var rotation = () => {
+  var configuration = [];
+
+  Agent.find({assignee: true})
+    .then((agents) => {
+      console.log(agents);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+}
+
 // app.get('/todos/:id', (req, res) => {
 //   var id = req.params.id;
 // 
