@@ -16,6 +16,11 @@ assignButton.onclick = () => {
   })
   .then((res) => {
     console.log(res);
+    if(res.status == 202){
+      console.log('Fuck you');
+      return;
+    }
+    console.log('This should not appear');  
   })
   .catch((e) => {
     console.log(e);
