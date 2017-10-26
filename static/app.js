@@ -2,13 +2,24 @@ var assignButton = document.querySelector('#assign');
 var reAssignButton = document.querySelector('#reAssign');
 var manualAssignButton = document.querySelector('#manualAssign');
 var ticketsSection = document.querySelector('.tickets');
-var queue = document.querySelector('.queue:checked');
 var tickets = [];
 
-console.log(queue);
-
 assignButton.onclick = () => {
-  console.log('Click!');  
+  var incNumber = document.getElementById('ticket-number').value;
+  var queue = document.querySelector('.queue:checked').value;
+  
+  axios.post('/incidents', {
+    incNumber,
+    assignedBy: "Martin Kaldramov",
+    assignedTo: "Mladen Slavchev",
+    queue
+  })
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((e) => {
+    console.log(e);
+  });
 }
 
 axios.get('http://127.0.0.1:3000/incidents')
