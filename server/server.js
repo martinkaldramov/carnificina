@@ -29,29 +29,14 @@ app.post('/incidents', (req, res) => {
     console.log(incident);
 
     if(incident){
-      console.log("processing the found incident part of the code");
-      console.log(`${incident.incNumber}  already assigned to ${incident.assignedTo}. New assignee is ${assignee} \n`);
-      incident.assignedTo = req.body.assignedTo;
-      incident.assignedAt = new Date();
-      incident.assignedBy = req.body.assignedBy;
-      incident.assignmentType = "re-assigned";
-      incident.history.push({
-         assgnedAt: new Date(),
-         assignedBy: req.body.assignedBy,
-         assignedTo: req.body.assignedTo,
-         assignmentType: "re-assigned" 
-      });
-      incident.save().then((inc) => {
-        res.send(inc);  
-      }).catch((e) => {
-        res.send(e);  
-      });
+      res.send(`${incident.incNumber}  already assigned to ${incident.assignedTo}.`);
     }else{
       console.log("Inc not found part of code");
       var incident = new Incident({
         incNumber: req.body.incNumber,
         assignedBy: req.body.assignedBy,
         assignedTo: req.body.assignedTo,
+        queue: req.body.queue,
         history: [{
           assgnedAt: new Date(),
           assignedBy: req.body.assignedBy,
@@ -69,6 +54,39 @@ app.post('/incidents', (req, res) => {
  }).catch((e) => {
    res.send(e);
  }); 
+});
+
+app.post('/incidents-reassign', (req, res) => {
+    var id = req.body.incNumber,
+        assignee = req.body.assignedTo,
+        assigner = req.body.assignedBy,
+        timeNow = new Date();
+
+    Incident.findOne({incNumber: id}).then((incident) => {
+
+      console.log("processing the found incident part of the code");
+      console.log(`${incident.incNumber}  already assigned to ${incident.assignedTo}. New assignee is ${assignee} \n`);
+      incident.assignedTo = req.body.assignedTo;
+      incident.assignedAt = new Date();
+      incident.assignedBy = req.body.assignedBy;
+      incident.assignmentType = "re-assigned";
+      incident.queue = "EMEA";
+      incident.history.push({
+         assgnedAt: new Date(),
+         assignedBy: req.body.assignedBy,
+         assignedTo: req.body.assignedTo,
+         assignmentType: "re-assigned" 
+      });
+      incident.save().then((inc) => {
+        res.send(inc);  
+      }).catch((e) => {
+        res.send(e);  
+      });
+
+    })
+    .catch((e) => {
+      res.send(e);  
+    });
 });
 
 app.get('/incidents', (req, res) => {
