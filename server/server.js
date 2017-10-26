@@ -29,7 +29,7 @@ app.post('/incidents', (req, res) => {
     console.log(incident);
 
     if(incident){
-      res.send(`${incident.incNumber}  already assigned to ${incident.assignedTo}.`);
+      res.status(202).send(`${incident.incNumber}  already assigned to ${incident.assignedTo}.`);
     }else{
       console.log("Inc not found part of code");
       var incident = new Incident({
