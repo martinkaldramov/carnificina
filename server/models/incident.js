@@ -22,6 +22,10 @@ var incidentSchema = new Schema({
     type: String,
     default: 'rotation'
   },
+  queue: {
+    type: String,
+    required: true
+  },
   history: {
     type: []
   }
