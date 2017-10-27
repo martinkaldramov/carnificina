@@ -29,7 +29,7 @@ app.post('/incidents', (req, res) => {
     console.log(incident);
 
     if(incident){
-      res.status(202).send(`${incident.incNumber}  already assigned to ${incident.assignedTo}.`);
+      res.status(202).send(incident);
     }else{
       console.log("Inc not found part of code");
       var incident = new Incident({
@@ -41,19 +41,19 @@ app.post('/incidents', (req, res) => {
           assgnedAt: new Date(),
           assignedBy: req.body.assignedBy,
           assignedTo: req.body.assignedTo,
-          assignmentType: "rotation" 
+          assignmentType: "rotation"
         }]
       });
 
       incident.save().then((inc) => {
-        res.send(inc);  
+        res.send(inc);
       }).catch((e) => {
         res.send(e);
       });
-    } 
+    }
  }).catch((e) => {
    res.send(e);
- }); 
+ });
 });
 
 app.post('/incidents-reassign', (req, res) => {
@@ -76,17 +76,17 @@ app.post('/incidents-reassign', (req, res) => {
          assgnedAt: new Date(),
          assignedBy: req.body.assignedBy,
          assignedTo: req.body.assignedTo,
-         assignmentType: "re-assigned" 
+         assignmentType: "re-assigned"
       });
       incident.save().then((inc) => {
-        res.send(inc);  
+        res.send(inc);
       }).catch((e) => {
-        res.send(e);  
+        res.send(e);
       });
 
     })
     .catch((e) => {
-      res.send(e);  
+      res.send(e);
     });
 });
 
@@ -94,8 +94,8 @@ app.get('/incidents', (req, res) => {
   Incident.find({}).then((incidents) => {
     res.send(incidents);
   }).catch((e) => {
-    res.send(e);  
-  });  
+    res.send(e);
+  });
 });
 
 app.get('/configuration', (req, res) => {
@@ -111,7 +111,7 @@ app.get('/configuration', (req, res) => {
 });
 
 app.listen(3000, () => {
-  console.log('Listening on port 3000');  
+  console.log('Listening on port 3000');
 });
 
 module.exports = {app};
