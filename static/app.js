@@ -22,10 +22,11 @@ var createP = (text) => {
   content.appendChild(statusP);
 }
 
-var createButton = (text, id) => {
+var createButton = (text, id, click) => {
   var btn = document.createElement('button');
   btn.id += id;
   btn.innerHTML = text;
+  btn.onclick = click;
   content.appendChild(btn);
 }
 
@@ -34,7 +35,8 @@ var assign = (queue) => {
   console.log(incNumber);
 
   if(incNumber == ""){
-    statusP.innerHTML = "Please enter a ticket number";
+    emptyContent();
+    createP('Enter a ticket number first.');
     return;
   }
 
@@ -47,10 +49,16 @@ var assign = (queue) => {
   .then((res) => {
     console.log(res);
     if(res.status == 202){
-      statusP.innerHTML = `${res.data.incNumber} already assigned to ${res.data.assignedTo}. Do you want to re-assign it?`;
+      var txt = `${res.data.incNumber} already assigned to ${res.data.assignedTo}. Do you want to re-assign it?`;
+      emptyContent();
+      createP(txt);
+      createButton('Yes', 'Yes', reAssign);
+      createButton('No', 'No', () => {});
       return;
     }
-    statusP.innerHTML = `${res.data.incNumber} has been assigned to ${res.data.assignedTo}`;
+    var txt = `${res.data.incNumber} has been assigned to ${res.data.assignedTo}`;
+    emptyContent();
+    createP(txt);
   })
   .catch((e) => {
     console.log(e);
@@ -59,13 +67,11 @@ var assign = (queue) => {
 
 var reAssign = () => {
   var incNumber = document.getElementById('ticket-number').value;
-  var queue = document.querySelector('.queue:checked').value;
 
   axios.post('/incidents-reassign', {
     incNumber,
     assignedBy: "Georgi Vachev",
     assignedTo: "Dimitar Pelovski",
-    queue
   })
   .then((res) => {
     console.log(res);

@@ -71,7 +71,6 @@ app.post('/incidents-reassign', (req, res) => {
       incident.assignedAt = new Date();
       incident.assignedBy = req.body.assignedBy;
       incident.assignmentType = "re-assigned";
-      incident.queue = "EMEA";
       incident.history.push({
          assgnedAt: new Date(),
          assignedBy: req.body.assignedBy,
