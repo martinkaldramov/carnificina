@@ -15,9 +15,10 @@ var emptyContent = () => {
   }
 }
 
-var createP = (text) => {
+var createP = (text, additionalClass) => {
   var statusP = document.createElement('p');
   statusP.className += ' statusP';
+  statusP.className += additionalClass;
   statusP.innerHTML = text;
   content.appendChild(statusP);
 }
@@ -36,7 +37,7 @@ var assign = (queue) => {
 
   if(incNumber == ""){
     emptyContent();
-    createP('Enter a ticket number first.');
+    createP('Enter a ticket number first.', ' padding');
     return;
   }
 
@@ -58,7 +59,8 @@ var assign = (queue) => {
     }
     var txt = `${res.data.incNumber} has been assigned to ${res.data.assignedTo}`;
     emptyContent();
-    createP(txt);
+    createP(txt, ' padding');
+    incNumber.value = "";
   })
   .catch((e) => {
     console.log(e);
@@ -67,6 +69,12 @@ var assign = (queue) => {
 
 var reAssign = () => {
   var incNumber = document.getElementById('ticket-number').value;
+  
+  if(incNumber == ""){
+    emptyContent();
+    createP('Enter a ticket number first.', ' padding');
+    return;
+  }
 
   axios.post('/incidents-reassign', {
     incNumber,
@@ -75,6 +83,7 @@ var reAssign = () => {
   })
   .then((res) => {
     console.log(res);
+    incNumber.value = "";
   })
   .catch((e) => {
     console.log(e);
