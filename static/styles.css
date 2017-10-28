@@ -42,12 +42,32 @@ body {
 --------- Assign Form ---------
 */
 
+#title {
+  text-align: center;
+}
+
 .assign-field {
   margin: 0 auto;
 }
 
+.form-element {
+  width: 40%;
+  margin: 0 auto;
+}
+
+.form-element button{
+  width: 100%;
+  padding: .8em 0;
+  margin-top: .9em;
+}
+
+.form-element input{
+  width: 100%;
+}
+
 #ticket-number {
-  display: block;
+  display: inline-block;
+  margin: 0 auto;
 }
 
 
@@ -68,7 +88,7 @@ body {
   width: 80%;
   height: 100%;
   margin: 0 auto;
-  background-color: green;
+  background-color: #AAD7FF;
 }
 
 .status p {

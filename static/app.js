@@ -18,10 +18,10 @@ assignButton.onclick = () => {
   .then((res) => {
     console.log(res);
     if(res.status == 202){
-      statusP.innerHTML = `Incident ${res.data.incNumber} already assigned to ${res.data.assignedTo}. Do you want to re-assign it?`;
+      statusP.innerHTML = `${res.data.incNumber} already assigned to ${res.data.assignedTo}. Do you want to re-assign it?`;
       return;
     }
-    console.log('This should not appear');
+    statusP.innerHTML = `${res.data.incNumber} has been assigned to ${res.data.assignedTo}`;
   })
   .catch((e) => {
     console.log(e);
