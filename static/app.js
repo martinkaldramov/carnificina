@@ -8,6 +8,12 @@ var tickets = [];
 assignButton.onclick = () => {
   var incNumber = document.getElementById('ticket-number').value;
   var queue = document.querySelector('.queue:checked').value;
+  console.log(typeof incNumber);
+
+  if(incNumber == ""){
+    statusP.innerHTML = "Please enter a ticket number";
+    return;
+  }
 
   axios.post('/incidents', {
     incNumber,

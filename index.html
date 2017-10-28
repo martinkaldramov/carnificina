@@ -2,6 +2,7 @@
 <head>
   <title>Carnificina</title>
   <link rel="stylesheet" href="./static/styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro" rel="stylesheet">
 </head>
 <body>
 
@@ -27,19 +28,22 @@
   <div class="wrapper">
 
     <main class="assign-field">
-      <h1 id="title">Carnificina</h1>
+      <h1 id="title">CARNIFICINA</h1>
 
       <form>
         <div class="form-element">
           <input type="text" name="incNumber" id="ticket-number"/>
         </div>
         <div class="form-element">
-          <button type="button" id="assign">Assign</button>
+          <button type="button" id="assign-emea" value="emea">EMEA</button>
+          <button type="button" id="assign-kl" value="kl">KL</button>
+        </div>
+        <div class="form-element">
+          <button type="button" id="assign-cr" value="cr">CR</button>
+          <button type="button" id="track">Track</button>
         </div>
         <div class="form-element">
           <button type="button" id="re-assign">Re-Assign</button>
-        </div>
-        <div class="form-element">
           <button type="button" id="manual-assign">Manual Assign</button>
         </div>
       </form>
