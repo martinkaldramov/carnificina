@@ -3,12 +3,26 @@ var reAssignButton = document.querySelector('#re-assign');
 var manualAssignButton = document.querySelector('#manual-assign');
 var ticketsSection = document.querySelector('.tickets');
 var statusP = document.querySelector('.status p');
+var assignEmema = document.getElementById('assign-emea');
+var assignKl= document.getElementById('assign-kl');
+var assignCr= document.getElementById('assign-cr');
 var tickets = [];
 
-assignButton.onclick = () => {
+assignEmema.onclick = () => {
+  assign(assignEmema.value);  
+}
+
+assignCr.onclick = () => {
+  assign(assignCr.value);  
+}
+
+assignKl.onclick = () => {
+  assign(assignKl.value);  
+}
+
+var assign = (queue) => {
   var incNumber = document.getElementById('ticket-number').value;
-  var queue = document.querySelector('.queue:checked').value;
-  console.log(typeof incNumber);
+  console.log(incNumber);
 
   if(incNumber == ""){
     statusP.innerHTML = "Please enter a ticket number";
@@ -19,7 +33,7 @@ assignButton.onclick = () => {
     incNumber,
     assignedBy: "Kalin Arsenov",
     assignedTo: "Dimitar Pelovski",
-    queue
+    queue: queue
   })
   .then((res) => {
     console.log(res);

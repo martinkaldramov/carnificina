@@ -101,3 +101,8 @@ body {
   display: inline-block;
   padding-top: 17px;
 }
+
+.content {
+  width: 60%;
+  margin: 0 auto;
+}
