@@ -6,13 +6,18 @@ var statusP = document.querySelector('.status p');
 var assignEmema = document.getElementById('assign-emea');
 var assignKl= document.getElementById('assign-kl');
 var assignCr= document.getElementById('assign-cr');
-var tickets = [];
+var track = document.getElementById('track');
+var content = document.querySelector(".status .content");
 
 var emptyContent = () => {
-  var content = document.querySelector(".status .content");
   while (content.firstChild) {
-        myNode.removeChild(content.firstChild);
+        content.removeChild(content.firstChild);
   }
+}
+
+var createP = () => {
+  document.createElement('p');
+
 }
 
 var assign = (queue) => {
@@ -75,6 +80,10 @@ assignKl.onclick = () => {
 
 reAssignButton.onclick = () => {
   reAssign();
+}
+
+track.onclick = () => {
+  emptyContent();  
 }
 
 axios.get('http://127.0.0.1:3000/incidents')
