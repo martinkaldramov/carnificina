@@ -15,9 +15,18 @@ var emptyContent = () => {
   }
 }
 
-var createP = () => {
-  document.createElement('p');
+var createP = (text) => {
+  var statusP = document.createElement('p');
+  statusP.className += ' statusP';
+  statusP.innerHTML = text;
+  content.appendChild(statusP);
+}
 
+var createButton = (text, id) => {
+  var btn = document.createElement('button');
+  btn.id += id;
+  btn.innerHTML = text;
+  content.appendChild(btn);
 }
 
 var assign = (queue) => {
@@ -83,7 +92,9 @@ reAssignButton.onclick = () => {
 }
 
 track.onclick = () => {
-  emptyContent();  
+  emptyContent();
+  createP('Someshit goes here');
+  createButton('Yes', 'Yes');
 }
 
 axios.get('http://127.0.0.1:3000/incidents')
