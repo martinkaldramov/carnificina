@@ -8,16 +8,11 @@ var assignKl= document.getElementById('assign-kl');
 var assignCr= document.getElementById('assign-cr');
 var tickets = [];
 
-assignEmema.onclick = () => {
-  assign(assignEmema.value);  
-}
-
-assignCr.onclick = () => {
-  assign(assignCr.value);  
-}
-
-assignKl.onclick = () => {
-  assign(assignKl.value);  
+var emptyContent = () => {
+  var content = document.querySelector(".status .content");
+  while (content.firstChild) {
+        myNode.removeChild(content.firstChild);
+  }
 }
 
 var assign = (queue) => {
@@ -64,6 +59,18 @@ var reAssign = () => {
   .catch((e) => {
     console.log(e);
   });
+}
+
+assignEmema.onclick = () => {
+  assign(assignEmema.value);  
+}
+
+assignCr.onclick = () => {
+  assign(assignCr.value);  
+}
+
+assignKl.onclick = () => {
+  assign(assignKl.value);  
 }
 
 reAssignButton.onclick = () => {
