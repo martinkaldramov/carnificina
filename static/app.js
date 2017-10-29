@@ -92,7 +92,23 @@ var reAssign = () => {
 }
 
 var track = () => {
-    
+  var incNumber = document.getElementById('ticket-number').value;  
+
+  if(incNumber == ""){
+    emptyContent();
+    createP('Enter a ticket number first.');
+    return;
+  }
+  axious.post('/incidents-track', {
+    incNumber,
+    assignedBy: "Bat Georgi"
+  })
+  .then((res) => {
+    console.log(res);  
+  })
+  .catch((e) => {
+    console.log(e);  
+  });
 }
 
 assignEmema.onclick = () => {

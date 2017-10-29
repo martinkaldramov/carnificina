@@ -89,6 +89,22 @@ app.post('/incidents-reassign', (req, res) => {
     });
 });
 
+app.post('/incidents-track', () => {
+  var incident = new Incident({
+    incNumber: req.body.incNumber,
+    assignedBy: req.body.assignedBy,
+    assignedTo: 'tracked',
+    queue: 'tracked',
+  });
+
+  incident.save().then((inc) => {
+    res.send(inc);
+  })
+  .catch((e) => {
+    res.send(e); 
+  });
+});
+
 app.get('/incidents', (req, res) => {
   Incident.find({}).then((incidents) => {
     res.send(incidents);
