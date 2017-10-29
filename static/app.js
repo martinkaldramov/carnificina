@@ -18,7 +18,8 @@ var emptyContent = () => {
 var createP = (text, additionalClass) => {
   var statusP = document.createElement('p');
   statusP.className += ' statusP';
-  statusP.className += additionalClass;
+  if(additionalClass)
+    statusP.className = additionalClass;
   statusP.innerHTML = text;
   content.appendChild(statusP);
 }
@@ -37,7 +38,7 @@ var assign = (queue) => {
 
   if(incNumber == ""){
     emptyContent();
-    createP('Enter a ticket number first.', ' padding');
+    createP('Enter a ticket number first.');
     return;
   }
 
@@ -59,7 +60,7 @@ var assign = (queue) => {
     }
     var txt = `${res.data.incNumber} has been assigned to ${res.data.assignedTo}`;
     emptyContent();
-    createP(txt, ' padding');
+    createP(txt);
     incNumber.value = "";
   })
   .catch((e) => {
@@ -72,7 +73,7 @@ var reAssign = () => {
   
   if(incNumber == ""){
     emptyContent();
-    createP('Enter a ticket number first.', ' padding');
+    createP('Enter a ticket number first.');
     return;
   }
 
@@ -88,6 +89,10 @@ var reAssign = () => {
   .catch((e) => {
     console.log(e);
   });
+}
+
+var track = () => {
+    
 }
 
 assignEmema.onclick = () => {
