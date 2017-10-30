@@ -83,13 +83,7 @@ app.post('/incidents-track', (req, res) => {
     assignedBy: req.body.assignedBy,
     assignedTo: 'tracked',
     assignmentType: 'tracked',
-    queue: 'tracked',
-    history: [{
-      assgnedAt: new Date(),
-      assignedBy: req.body.assignedBy,
-      assignedTo: 'tracked',
-      assignmentType: 'tracked'
-    }]
+    queue: 'tracked'
   });
 
   incident.save().then((inc) => {
