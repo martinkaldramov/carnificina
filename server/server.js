@@ -65,12 +65,6 @@ app.post('/incidents-reassign', (req, res) => {
       incident.assignedAt = new Date();
       incident.assignedBy = req.body.assignedBy;
       incident.assignmentType = "re-assigned";
-      incident.history.push({
-         assgnedAt: new Date(),
-         assignedBy: req.body.assignedBy,
-         assignedTo: req.body.assignedTo,
-         assignmentType: "re-assigned"
-      });
       incident.save().then((inc) => {
         res.send(inc);
       }).catch((e) => {
