@@ -95,6 +95,10 @@ var reAssign = () => {
   });
 }
 
+var assignAgain = () => {
+    
+}
+
 var track = () => {
   var incNumber = document.getElementById('ticket-number').value;  
 
