@@ -6,7 +6,7 @@ var statusP = document.querySelector('.status p');
 var assignEmema = document.getElementById('assign-emea');
 var assignKl= document.getElementById('assign-kl');
 var assignCr= document.getElementById('assign-cr');
-var track = document.getElementById('track');
+var trackButton = document.getElementById('track');
 var content = document.querySelector(".status .content");
 
 var emptyContent = () => {
@@ -99,12 +99,15 @@ var track = () => {
     createP('Enter a ticket number first.');
     return;
   }
-  axious.post('/incidents-track', {
+  axios.post('/incidents-track', {
     incNumber,
     assignedBy: "Bat Georgi"
   })
   .then((res) => {
     console.log(res);  
+    var txt = `${res.data.incNumber} has been tracked by ${res.data.assignedBy}`;
+    emptyContent();
+    createP(txt);
   })
   .catch((e) => {
     console.log(e);  
@@ -127,10 +130,9 @@ reAssignButton.onclick = () => {
   reAssign();
 }
 
-track.onclick = () => {
+trackButton.onclick = () => {
   emptyContent();
-  createP('Someshit goes here');
-  createButton('Yes', 'Yes');
+  track();
 }
 
 axios.get('http://127.0.0.1:3000/incidents')
