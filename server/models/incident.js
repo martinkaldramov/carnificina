@@ -26,8 +26,9 @@ var incidentSchema = new Schema({
     type: String,
     required: true
   },
-  history: {
-    type: []
+  track: {
+    type: Boolean,
+    default: true
   }
 });
 

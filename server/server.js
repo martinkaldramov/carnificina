@@ -36,13 +36,7 @@ app.post('/incidents', (req, res) => {
         incNumber: req.body.incNumber,
         assignedBy: req.body.assignedBy,
         assignedTo: req.body.assignedTo,
-        queue: req.body.queue,
-        history: [{
-          assgnedAt: new Date(),
-          assignedBy: req.body.assignedBy,
-          assignedTo: req.body.assignedTo,
-          assignmentType: "rotation"
-        }]
+        queue: req.body.queue
       });
 
       incident.save().then((inc) => {
@@ -108,7 +102,7 @@ app.post('/incidents-track', (req, res) => {
     res.send(inc);
   })
   .catch((e) => {
-    res.send(e); 
+    res.send(e);
   });
 });
 
