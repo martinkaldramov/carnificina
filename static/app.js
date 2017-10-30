@@ -51,6 +51,10 @@ var assign = (queue) => {
   .then((res) => {
     console.log(res);
     if(res.status == 202){
+      if(res.data.assignedTo == 'tracked'){
+        reAssign();
+        return;
+      }
       var txt = `${res.data.incNumber} already assigned to ${res.data.assignedTo}. Do you want to re-assign it?`;
       emptyContent();
       createP(txt);
