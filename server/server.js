@@ -31,7 +31,6 @@ app.post('/incidents', (req, res) => {
     if(incident){
       res.status(202).send(incident);
     }else{
-      console.log("Inc not found prt of code");
       var incident = new Incident({
         incNumber: req.body.incNumber,
         assignedBy: req.body.assignedBy,
