@@ -8,6 +8,15 @@ var assignKl= document.getElementById('assign-kl');
 var assignCr= document.getElementById('assign-cr');
 var trackButton = document.getElementById('track');
 var content = document.querySelector(".status .content");
+var agentList = [];
+
+axios.get('http://127.0.0.1:3000/incidents')
+  .then((res) => {
+   console.log(res); 
+  })
+  .catch((e) => {
+   console.log(e); 
+  });
 
 var emptyContent = () => {
   while (content.firstChild) {
