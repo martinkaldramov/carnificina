@@ -10,7 +10,7 @@ var trackButton = document.getElementById('track');
 var content = document.querySelector(".status .content");
 var agentList = [];
 
-axios.get('http://127.0.0.1:3000/incidents')
+axios.get('http://127.0.0.1:3000/configuration')
   .then((res) => {
    console.log(res); 
   })
