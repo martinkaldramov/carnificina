@@ -1,0 +1,14 @@
+{
+  "plugins": [
+    "node",
+    "security"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:node/recommended",
+    "plugin:security/recommended"
+  ],
+  "rules": {
+    "node/exports-style": ["error", "module.exports"]
+  }
+}

@@ -6,27 +6,12 @@ var {ObjectID} = require('mongodb');
 var {mongoose} = require('./db/mongoose');
 var {Incident} = require('./models/incident.js');
 var {Agent} = require('./models/agent.js');
+const incController = require('./controllers/incident_controller');
 
 var app = express();
 
 app.use('/static', express.static(path.join(__dirname + '/../static')));
 app.use(bodyParser.json());
-
-var assigneeList = [];
-
-Agent.find({})
-.then((agents) => {
-  assigneeList = agents;
-})
-.catch((e) => {
-  console.log(e);  
-});
-
-var rotation = () => {
-  console.log(`Rotation fn + ${assigneeList}`);   
-}
-
-rotation();
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname + '/../index.html'));
