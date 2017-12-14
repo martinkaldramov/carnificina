@@ -1,12 +1,11 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var path = require('path');
-var {ObjectID} = require('mongodb'); // eslint-disable-line
-
-var {Agent} = require('./models/agent.js');
+const express = require('express');
+const bodyParser = require('body-parser');
+const path = require('path');
+const {ObjectID} = require('mongodb'); // eslint-disable-line
 const incController = require('./controllers/incident_controller');
+const configuration = require('./controllers/configuration_controller');
 
-var app = express();
+const app = express();
 
 app.use('/static', express.static(path.join(__dirname + '/../static')));
 app.use(bodyParser.json());
@@ -28,15 +27,7 @@ app.get('/incidents', (req, res) => {
 });
 
 app.get('/configuration', (req, res) => {
-
-  Agent.find({assignee: true})
-    .then((agents) => {
-      res.send(agents);
-    })
-    .catch((e) => {
-      res.send(e);
-    });
-
+  configuration.getConfiguration(req, res);
 });
 
 app.listen(3000, () => {
