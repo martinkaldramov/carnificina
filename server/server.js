@@ -1,10 +1,8 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
-var {ObjectID} = require('mongodb');
+var {ObjectID} = require('mongodb'); // eslint-disable-line
 
-var {mongoose} = require('./db/mongoose');
-var {Incident} = require('./models/incident.js');
 var {Agent} = require('./models/agent.js');
 const incController = require('./controllers/incident_controller');
 
@@ -18,58 +16,15 @@ app.get('/', (req, res) => {
 });
 
 app.post('/incidents', (req, res) => {
-  incController.postIncident(req, res);
+  incController.incidentAssign(req, res);
 });
 
 app.post('/incidents-reassign', (req, res) => {
-    var id = req.body.incNumber,
-        assignee = req.body.assignedTo,
-        assigner = req.body.assignedBy,
-        timeNow = new Date();
-
-    Incident.findOne({incNumber: id}).then((incident) => {
-
-      console.log(`${incident.incNumber}  already assigned to ${incident.assignedTo}. New assignee is ${assignee} \n`);
-      incident.incNumber = id;
-      incident.assignedTo = req.body.assignedTo;
-      incident.assignedAt = new Date();
-      incident.assignedBy = req.body.assignedBy;
-      incident.assignmentType = "re-assigned";
-      incident.save().then((inc) => {
-        res.send(inc);
-      }).catch((e) => {
-        res.send(e);
-      });
-
-    })
-    .catch((e) => {
-      res.send(e);
-    });
-});
-
-app.post('/incidents-track', (req, res) => {
-  var incident = new Incident({
-    incNumber: req.body.incNumber,
-    assignedBy: req.body.assignedBy,
-    assignedTo: 'tracked',
-    assignmentType: 'tracked',
-    queue: 'tracked'
-  });
-
-  incident.save().then((inc) => {
-    res.send(inc);
-  })
-  .catch((e) => {
-    res.send(e);
-  });
+    incController.incidentReassign(req, res);
 });
 
 app.get('/incidents', (req, res) => {
-  Incident.find({}).then((incidents) => {
-    res.send(incidents);
-  }).catch((e) => {
-    res.send(e);
-  });
+  incController.incidentList(req, res);
 });
 
 app.get('/configuration', (req, res) => {
@@ -85,7 +40,7 @@ app.get('/configuration', (req, res) => {
 });
 
 app.listen(3000, () => {
-  console.log('Listening on port 3000');
+  console.log('Listening on port 3000'); // eslint-disable-line
 });
 
 module.exports = {app};

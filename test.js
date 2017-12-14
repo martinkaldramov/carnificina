@@ -9,7 +9,7 @@ test('A passing test', (assert) => {
 
 test('Assertions with tape.', (assert) => {
   const expected = 1;
-  const actual = 1;
+  const actual = 20;
 
   assert.equal(actual, expected,
     'Given two mismatched values, .equal() should produce a nice bug report');
