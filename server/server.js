@@ -18,36 +18,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/incidents', (req, res) => {
-  var id = req.body.incNumber,
-      assignee = req.body.assignedTo,
-      assigner = req.body.assignedBy,
-      timeNow = new Date();
-
-  console.log(id);
-
-  Incident.findOne({incNumber: id}).then((incident) => {
-
-    console.log(incident);
-
-    if(incident){
-      res.status(202).send(incident);
-    }else{
-      var incident = new Incident({
-        incNumber: req.body.incNumber,
-        assignedBy: req.body.assignedBy,
-        assignedTo: req.body.assignedTo,
-        queue: req.body.queue
-      });
-
-      incident.save().then((inc) => {
-        res.send(inc);
-      }).catch((e) => {
-        res.send(e);
-      });
-    }
- }).catch((e) => {
-   res.send(e);
- });
+  incController.postIncident(req, res);
 });
 
 app.post('/incidents-reassign', (req, res) => {

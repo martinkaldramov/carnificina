@@ -1,9 +1,8 @@
 var {Incident} = require('./../models/incident.js');
 
 module.exports.postIncident = (req, res) => {
-  var id = req.body.incNumber;
 
-  Incident.findOne({incNumber: id}).then((inc) => {
+  Incident.findOne({incNumber: req.body.incNumber}).then((inc) => {
 
     if(inc){
       res.status(202).send(incident);
